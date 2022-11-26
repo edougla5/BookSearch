@@ -23,11 +23,21 @@ const Books = () => {
   const [collection, setCollection] = useState([])
 
   const addBook = book => {
-    M.toast({html: 'Added to collection!'})
     let temp=collection
-    temp.push(book)
+    if(!collection.length) {
+      M.toast({html: 'Added to collection!'})
+      temp.push(book)
+    } else {
+      collection.filter((e) => {
+      if(e.id == book.id) {
+        M.toast({html: 'Book already in collection'})
+      } else {
+        M.toast({html: 'Added to collection!'})
+        temp.push(book)
+      }
+    })
+    }
     setCollection(temp)
-    console.log(collection)
   }
 
   let search = (searchVal) => {
@@ -49,14 +59,14 @@ const Books = () => {
       <TestModal data={collection} className='testModal'/>
       <div className="books">
         {
-           books.map((book, index) => (
-             <Book
+          books.map((book, index) => (
+            <Book
                key={`${index}-${book.volumeInfo.title}`}
                title={book.volumeInfo.title}
                image={(book.volumeInfo.imageLinks) ? book.volumeInfo.imageLinks.thumbnail : logo}
                author={book.volumeInfo.authors}
                link={book.volumeInfo.infoLink}
-               info={book.searchInfo.textSnippet}
+               info={(book.searchInfo) ? book.searchInfo.textSnippet : 'no description here'}
                click = { () => addBook(book)}
              />
              )   

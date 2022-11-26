@@ -11,7 +11,7 @@ const Collection = props => {
         {
           collection.map((book) => (
              <div className='book'>
-            <div className="coverContainer">
+            <div className="coverContainerCollection">
               <img src={(book.volumeInfo.imageLinks) ? book.volumeInfo.imageLinks.thumbnail : logo} className="collectionImage" />
               <div className="bookDescription">{book.volumeInfo.info}</div>
             </div>

@@ -28,7 +28,7 @@ const Header = (props) => {
 
   return (
     <nav className="navbar">
-      <div class="nav-wrapper">
+      <div className="nav-wrapper">
         <form className="search" onSubmit={handleSubmit}>
           <div class="input-field">
             <input
